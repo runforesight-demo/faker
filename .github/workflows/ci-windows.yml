@@ -4,6 +4,8 @@ on:
   workflow_dispatch:
 
 env:
+  FORESIGHT_UPLOADER_SIGNER_URL: https://upload.service.runforesight.us
+  WORKFLOW_TELEMETRY_BASE_URL: https://api.service.runforesight.us
   FORESIGHT_LOG_LEVEL: debug
 
 permissions:
@@ -23,7 +25,7 @@ jobs:
         if: always()
         uses: runforesight/foresight-workflow-kit-action@v1
         with:
-          api_key: 01b2066b-4328-4048-829b-83f31b462d5c
+          api_key: ${{ secrets.FORESIGHT_PROJECT_WALL_APIKEY }}
       #- name: Thundra Registry
         #run: |
           #npm config set registry ${{ secrets.THUNDRA_REGISTRY }}
@@ -50,7 +52,7 @@ jobs:
         uses: runforesight/foresight-test-kit-action@v1
         if: ${{ always() }}
         with:
-          api_key: 01b2066b-4328-4048-829b-83f31b462d5c
+          api_key: ${{ secrets.FORESIGHT_PROJECT_WALL_APIKEY }}
           test_format: JUNIT
           test_framework: PYTEST
           test_path: ./results/**
