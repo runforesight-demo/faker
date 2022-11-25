@@ -4,8 +4,6 @@ on:
   workflow_dispatch:
 
 env:
-  FORESIGHT_UPLOADER_SIGNER_URL: https://upload.service.runforesight.us
-  WORKFLOW_TELEMETRY_BASE_URL: https://api.service.runforesight.us
   FORESIGHT_LOG_LEVEL: debug
 
 permissions:
@@ -25,11 +23,11 @@ jobs:
         if: always()
         uses: runforesight/foresight-workflow-kit-action@v1
         with:
-          api_key: ${{ secrets.FORESIGHT_PROJECT_WALL_APIKEY }}
-      - name: Thundra Registry
-        run: |
-          npm config set registry ${{ secrets.THUNDRA_REGISTRY }}
-          npm config set _auth ${{ secrets.THUNDRA_REGISTRY_AUTH }}
+          api_key: 01b2066b-4328-4048-829b-83f31b462d5c
+      #- name: Thundra Registry
+        #run: |
+          #npm config set registry ${{ secrets.THUNDRA_REGISTRY }}
+          #npm config set _auth ${{ secrets.THUNDRA_REGISTRY_AUTH }}
       - name: Setup pip cache
         uses: actions/cache@v3
         id: pipcache
@@ -52,13 +50,13 @@ jobs:
         uses: runforesight/foresight-test-kit-action@v1
         if: ${{ always() }}
         with:
-          api_key: ${{ secrets.FORESIGHT_PROJECT_WALL_APIKEY }}
+          api_key: 01b2066b-4328-4048-829b-83f31b462d5c
           test_format: JUNIT
           test_framework: PYTEST
           test_path: ./results/**
           coverage_path: ./coverage/**
           coverage_format: COBERTURA/XML
-          cli_version: 123.456.802
+          cli_version: 1.2.0
       - name: Upload coverage file
         uses: actions/upload-artifact@v3
         with:
