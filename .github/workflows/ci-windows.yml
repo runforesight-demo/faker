@@ -26,6 +26,10 @@ jobs:
         uses: runforesight/foresight-workflow-kit-action@v1
         with:
           api_key: ${{ secrets.FORESIGHT_PROJECT_WALL_APIKEY }}
+      - name: Thundra Registry
+        run: |
+          npm config set registry ${{ secrets.THUNDRA_REGISTRY }}
+          npm config set _auth ${{ secrets.THUNDRA_REGISTRY_AUTH }}
       - name: Setup pip cache
         uses: actions/cache@v3
         id: pipcache
@@ -54,6 +58,7 @@ jobs:
           test_path: ./results/**
           coverage_path: ./coverage/**
           coverage_format: COBERTURA/XML
+          cli_version: 123.456.802
       - name: Upload coverage file
         uses: actions/upload-artifact@v3
         with:
