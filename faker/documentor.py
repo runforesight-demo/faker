@@ -9,6 +9,10 @@ from .providers import BaseProvider
 from .proxy import Faker
 
 
+def foresight_uncover():
+    return "foresight uncover!"
+
+
 class FakerEnum(Enum):
     """Required for faker.providers.enum"""
 
